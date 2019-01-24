@@ -5,7 +5,8 @@
       <form #formValues="ngForm" [formGroup]="profileForm" autocomplete="off" (ngSubmit)="saveProfile(formValues.value)" novalidate>
         <div class="form-group" [ngClass]="{ 'error' : !validateFirstName() }">
           <label for="firstName">First Name:</label>
-          <em *ngIf="!validateFirstName()">Required</em>
+          <em *ngIf="!validateFirstName() && !!profileForm.controls.firstName?.errors.required">Required</em>
+          <em *ngIf="!validateFirstName() && !!profileForm.controls.firstName?.errors.pattern">Pattern mismatch</em>
           <input formControlName="firstName" name="firstName" id="firstName" type="text" class="form-control" placeholder="First Name..." />
         </div>
         <div class="form-group" [ngClass]="{ 'error' : !validateLastName() }">

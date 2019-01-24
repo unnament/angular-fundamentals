@@ -14,6 +14,10 @@ export class EventService {
   getEvent(id: number): IEvent {
     return EVENTS.find(event => event.id === +id);
   }
+
+  saveEvent(event: IEvent): void {
+    EVENTS.push(event);
+  }
 }
 
 const EVENTS: IEvent[] = [
