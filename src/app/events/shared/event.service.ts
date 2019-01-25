@@ -18,6 +18,11 @@ export class EventService {
   saveEvent(event: IEvent): void {
     EVENTS.push(event);
   }
+
+  updateEvent(event: IEvent): void {
+    const index = EVENTS.findIndex(x => x.id === event.id);
+    EVENTS[index] = event;
+  }
 }
 
 const EVENTS: IEvent[] = [
