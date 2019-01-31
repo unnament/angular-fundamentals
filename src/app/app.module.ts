@@ -7,7 +7,6 @@ import { EventsListComponent } from './events/events-list.component';
 import { EventThumbnailComponent } from './events/event-thumbnail.component';
 import { NavBarComponent } from './nav/navbar.component';
 import { EventService } from './events/shared/event.service';
-import { TOASTR_TOKEN, IToastr } from './shared/toastr.service';
 import { EventDetailsComponent } from './events/event-details/event-details.component';
 import { CreateEventComponent } from './events/create-event.component';
 import { Error404Component } from './errors/404.component';
@@ -17,10 +16,15 @@ import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { CreateSessionComponent } from './events/event-details/create-session.component';
 import { SessionListComponent } from './events/event-details/session-list.component';
-import { CollapsibleWellComponent } from './shared/collapsible-well.component';
-import { DurationPipe } from './shared/duration.pipe';
+import { DurationPipe,
+  CollapsibleWellComponent,
+  TOASTR_TOKEN, IToastr,
+  JQ_TOKEN,
+  SimpleModalComponent,
+  ModalTriggerDirective  } from './shared/index';
 
 const toastr: IToastr = window['toastr'];
+const jQuery: any = window['$'];
 
 @NgModule({
   declarations: [
@@ -34,7 +38,9 @@ const toastr: IToastr = window['toastr'];
     CreateSessionComponent,
     SessionListComponent,
     CollapsibleWellComponent,
-    DurationPipe
+    DurationPipe,
+    SimpleModalComponent,
+    ModalTriggerDirective
   ],
   imports: [
     BrowserModule,
@@ -44,17 +50,21 @@ const toastr: IToastr = window['toastr'];
   ],
   providers: [
     EventService,
-    {
-      provide: TOASTR_TOKEN,
-      useValue: toastr
-    },
     EventRouteActivator,
     {
       provide: 'canDeactivateCreateEvent',
       useValue: checkDirtyState
     },
     EventListResolver,
-    AuthService
+    AuthService,
+    {
+      provide: TOASTR_TOKEN,
+      useValue: toastr
+    },
+    {
+      provide: JQ_TOKEN,
+      useValue: jQuery
+    }
   ],
   bootstrap: [EventsAppComponent]
 })
