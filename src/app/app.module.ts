@@ -22,6 +22,8 @@ import { DurationPipe,
   JQ_TOKEN,
   SimpleModalComponent,
   ModalTriggerDirective  } from './shared/index';
+import { UpvoteComponent } from './events/event-details/upvote.component';
+import { LocationValidatorDirective } from './events/location-validator.directive';
 
 const toastr: IToastr = window['toastr'];
 const jQuery: any = window['$'];
@@ -38,9 +40,11 @@ const jQuery: any = window['$'];
     CreateSessionComponent,
     SessionListComponent,
     CollapsibleWellComponent,
-    DurationPipe,
+    UpvoteComponent,
     SimpleModalComponent,
-    ModalTriggerDirective
+    DurationPipe,
+    ModalTriggerDirective,
+    LocationValidatorDirective
   ],
   imports: [
     BrowserModule,
