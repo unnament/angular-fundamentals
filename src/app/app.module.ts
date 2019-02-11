@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { EventsAppComponent } from './events-app.component';
@@ -10,7 +11,6 @@ import { EventService } from './events/shared/event.service';
 import { EventDetailsComponent } from './events/event-details/event-details.component';
 import { CreateEventComponent } from './events/create-event.component';
 import { Error404Component } from './errors/404.component';
-import { EventRouteActivator } from './events/event-details/event-route-activator.service';
 import { EventListResolver } from './events/events-list-resolver.service';
 import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
@@ -24,6 +24,7 @@ import { DurationPipe,
   ModalTriggerDirective  } from './shared/index';
 import { UpvoteComponent } from './events/event-details/upvote.component';
 import { LocationValidatorDirective } from './events/location-validator.directive';
+import { EventResolver } from './events/event-resolver.service';
 
 const toastr: IToastr = window['toastr'];
 const jQuery: any = window['$'];
@@ -50,15 +51,16 @@ const jQuery: any = window['$'];
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     EventService,
-    EventRouteActivator,
     {
       provide: 'canDeactivateCreateEvent',
       useValue: checkDirtyState
     },
+    EventResolver,
     EventListResolver,
     AuthService,
     {

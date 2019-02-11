@@ -24,21 +24,9 @@ export class CreateEventComponent implements OnInit {
   }
 
   saveEvent(formValues) {
-    console.log(formValues);
-    const worker = new Date();
-    const event: IEvent = {
-      id: +(+worker.getTime()).toString().slice(-3),
-      name: formValues.name,
-      date: formValues.date,
-      time: formValues.time,
-      price: formValues.price,
-      imageUrl: formValues.imageUrl,
-      location: formValues.location,
-      onlineUrl: formValues.onlineUrl,
-      sessions: []
-    };
-    this.eventService.saveEvent(event);
-    this.isDirty = false;
-    this.router.navigate(['/events']);
+    this.eventService.saveEvent(formValues).subscribe(() => {
+      this.isDirty = false;
+      this.router.navigate(['/events']);
+    });
   }
 }

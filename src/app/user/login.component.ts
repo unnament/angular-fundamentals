@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   userName: string;
   password: string;
+  loginInvalid = false;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -20,8 +21,14 @@ export class LoginComponent implements OnInit {
 
   login(values): void {
     console.log(values);
-    this.authService.loginUser(values.userName, values.password);
-    this.router.navigate(['events']);
+    this.authService.loginUser(values.userName, values.password)
+      .subscribe(resp => {
+        if (!resp) {
+          this.loginInvalid = true;
+        } else {
+          this.router.navigate(['events']);
+        }
+      });
   }
 
   cancel(): void {
