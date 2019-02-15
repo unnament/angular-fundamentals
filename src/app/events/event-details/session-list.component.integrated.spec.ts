@@ -14,14 +14,14 @@ describe('SessionListComponent', () => {
   let fixture: ComponentFixture<SessionListComponent>,
     component: SessionListComponent,
     element: HTMLElement,
-    debugEl: DebugElement
+    debugEl: DebugElement;
 
     beforeEach(async(() => {
-      let mockAuthService = {
+      const mockAuthService = {
         isAuthenticated: () => true,
         currentUser: { userName: 'Joe' }
       };
-      let mockVoterService = {
+      const mockVoterService = {
         userHasVoted: () => true
       };
 
@@ -29,9 +29,9 @@ describe('SessionListComponent', () => {
         imports: [],
         declarations: [
           SessionListComponent,
-          //UpvoteComponent,
+          // UpvoteComponent,
           DurationPipe,
-          //CollapsibleWellComponent
+          // CollapsibleWellComponent
         ],
         providers: [
           { provide: AuthService, useValue: mockAuthService },
@@ -63,7 +63,7 @@ describe('SessionListComponent', () => {
         component.ngOnChanges();
         fixture.detectChanges();
 
-        //expect(element.querySelector('[well-title]').textContent).toContain('Session 1');
+        // expect(element.querySelector('[well-title]').textContent).toContain('Session 1');
         expect(debugEl.query(By.css('[well-title]')).nativeElement.textContent).toContain('Session 1');
 
       });

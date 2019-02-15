@@ -2,6 +2,7 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { preserveWhitespacesDefault } from '@angular/compiler';
 
 @Component({
+// tslint:disable-next-line: component-selector
   selector: 'upvote',
   template: `
     <div class="votingWidgetContainer pointable" (click)="onClick()">
